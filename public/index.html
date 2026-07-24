@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeadDesk Mini — Log a lead in one ticket</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar__mark">LEADDESK <span>MINI</span></div>
+    <div class="topbar__meta">DESK STATUS: <span class="dot"></span> OPEN</div>
+  </header>
+
+  <main class="layout">
+    <section class="pitch">
+      <p class="eyebrow">/// intake system</p>
+      <h1>Every lead gets<br>a ticket, not a black hole.</h1>
+      <p class="pitch__body">
+        Most contact forms dump into an inbox and die there. LeadDesk logs every
+        submission the second it lands, timestamps it, and puts it in front of
+        a human queue — so nothing sits unanswered for three days.
+      </p>
+      <ul class="pitch__facts">
+        <li><span>01</span> Validated on the way in — no junk rows</li>
+        <li><span>02</span> Every ticket gets a status: New → Contacted → Closed</li>
+        <li><span>03</span> Searchable desk view for whoever's triaging</li>
+      </ul>
+    </section>
+
+    <section class="ticket-wrap">
+      <form id="leadForm" class="ticket" novalidate>
+        <div class="ticket__stub">
+          <span class="ticket__label">TICKET</span>
+          <span class="ticket__number" id="ticketNumber">#PENDING</span>
+        </div>
+
+        <div class="ticket__perf" aria-hidden="true"></div>
+
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" autocomplete="name" placeholder="Jordan Ellis">
+          <p class="field__error" data-for="name"></p>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="jordan@company.com">
+          <p class="field__error" data-for="email"></p>
+        </div>
+
+        <div class="field">
+          <label for="budget_range">Budget range</label>
+          <select id="budget_range" name="budget_range">
+            <option value="">Select one</option>
+            <option value="<$1k">Under $1,000</option>
+            <option value="$1k-$5k">$1,000 – $5,000</option>
+            <option value="$5k-$20k">$5,000 – $20,000</option>
+            <option value="$20k+">$20,000+</option>
+          </select>
+          <p class="field__error" data-for="budget_range"></p>
+        </div>
+
+        <div class="field">
+          <label for="message">What are you trying to solve?</label>
+          <textarea id="message" name="message" rows="4" placeholder="Tell us briefly what you need..."></textarea>
+          <p class="field__error" data-for="message"></p>
+        </div>
+
+        <button type="submit" class="ticket__submit">
+          <span>File this ticket</span>
+        </button>
+
+        <p class="ticket__note" id="formNote"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    Built for Digital Heroes Training Task ·
+    <a href="https://digitalheroesco.com" target="_blank" rel="noopener">digitalheroesco.com</a>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

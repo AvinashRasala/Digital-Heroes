@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LeadDesk Mini — Desk View</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+  <header class="topbar">
+    <div class="topbar__mark">LEADDESK <span>MINI</span> — DESK VIEW</div>
+    <div class="topbar__meta">
+      <span id="whoami"></span>
+      <button id="logoutBtn" class="link-btn">Log out</button>
+    </div>
+  </header>
+
+  <main class="desk">
+    <div class="desk__controls">
+      <input type="search" id="searchInput" placeholder="Search name, email, or message..." class="desk__search">
+      <div class="desk__count" id="deskCount"></div>
+    </div>
+
+    <div class="desk__table-wrap">
+      <table class="desk__table">
+        <thead>
+          <tr>
+            <th>Ticket</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Budget</th>
+            <th>Message</th>
+            <th>Filed</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="leadsBody">
+          <tr><td colspan="7" class="desk__empty">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>
