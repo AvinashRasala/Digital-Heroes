@@ -3,45 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LeadDesk Mini — Desk View</title>
+<title>LeadDesk Mini — Pipeline Board</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="admin.css">
 </head>
 <body class="admin-body">
 
   <header class="topbar">
-    <div class="topbar__mark">LEADDESK <span>MINI</span> — DESK VIEW</div>
+    <div class="topbar__mark">LEADDESK <span>MINI</span> — PIPELINE BOARD</div>
     <div class="topbar__meta">
       <span id="whoami"></span>
+      <button id="exportBtn" class="link-btn">Export CSV</button>
       <button id="logoutBtn" class="link-btn">Log out</button>
     </div>
   </header>
 
-  <main class="desk">
-    <div class="desk__controls">
-      <input type="search" id="searchInput" placeholder="Search name, email, or message..." class="desk__search">
-      <div class="desk__count" id="deskCount"></div>
+  <main class="board">
+    <div class="board__controls">
+      <input type="search" id="searchInput" placeholder="Search name, email, or message..." class="board__search">
     </div>
 
-    <div class="desk__table-wrap">
-      <table class="desk__table">
-        <thead>
-          <tr>
-            <th>Ticket</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Budget</th>
-            <th>Message</th>
-            <th>Filed</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="leadsBody">
-          <tr><td colspan="7" class="desk__empty">Loading...</td></tr>
-        </tbody>
-      </table>
+    <div class="stats-bar" id="statsBar"></div>
+
+    <div class="board__columns">
+      <section class="column" data-status="New">
+        <h2 class="column__title"><span class="column__dot dot-new"></span>New <span class="column__count" id="count-New">0</span></h2>
+        <div class="column__cards" id="cards-New"></div>
+      </section>
+      <section class="column" data-status="Contacted">
+        <h2 class="column__title"><span class="column__dot dot-contacted"></span>Contacted <span class="column__count" id="count-Contacted">0</span></h2>
+        <div class="column__cards" id="cards-Contacted"></div>
+      </section>
+      <section class="column" data-status="Closed">
+        <h2 class="column__title"><span class="column__dot dot-closed"></span>Closed <span class="column__count" id="count-Closed">0</span></h2>
+        <div class="column__cards" id="cards-Closed"></div>
+      </section>
     </div>
   </main>
 

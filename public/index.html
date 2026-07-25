@@ -3,42 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LeadDesk Mini — Log a lead in one ticket</title>
+<title>LeadDesk Mini — Get leads into a pipeline, not an inbox</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <header class="topbar">
     <div class="topbar__mark">LEADDESK <span>MINI</span></div>
-    <div class="topbar__meta">DESK STATUS: <span class="dot"></span> OPEN</div>
+    <div class="topbar__meta">PIPELINE: <span class="dot"></span> ACCEPTING LEADS</div>
   </header>
 
   <main class="layout">
     <section class="pitch">
-      <p class="eyebrow">/// intake system</p>
-      <h1>Every lead gets<br>a ticket, not a black hole.</h1>
+      <p class="eyebrow">/// built for teams who move fast</p>
+      <h1>Your leads deserve<br>better than a <span class="highlight">spreadsheet</span>.</h1>
       <p class="pitch__body">
-        Most contact forms dump into an inbox and die there. LeadDesk logs every
-        submission the second it lands, timestamps it, and puts it in front of
-        a human queue — so nothing sits unanswered for three days.
+        Fill this in, and it doesn't just sit in someone's inbox waiting to be
+        noticed. It lands straight on a live board, sorted, flagged if it's a
+        big one, and ready for whoever's on lead duty today.
       </p>
       <ul class="pitch__facts">
-        <li><span>01</span> Validated on the way in — no junk rows</li>
-        <li><span>02</span> Every ticket gets a status: New → Contacted → Closed</li>
-        <li><span>03</span> Searchable desk view for whoever's triaging</li>
+        <li><span>→</span> Validated twice — client and server — before it's stored</li>
+        <li><span>→</span> Every lead moves through New → Contacted → Closed</li>
+        <li><span>→</span> High-budget leads get flagged automatically</li>
+        <li><span>→</span> One click exports the whole pipeline to CSV</li>
       </ul>
     </section>
 
-    <section class="ticket-wrap">
-      <form id="leadForm" class="ticket" novalidate>
-        <div class="ticket__stub">
-          <span class="ticket__label">TICKET</span>
-          <span class="ticket__number" id="ticketNumber">#PENDING</span>
-        </div>
-
-        <div class="ticket__perf" aria-hidden="true"></div>
+    <section class="card-wrap">
+      <form id="leadForm" class="intake-card" novalidate>
+        <h2 class="intake-card__title">Tell us what you need</h2>
+        <p class="intake-card__subtitle">Two minutes, four fields, done.</p>
 
         <div class="field">
           <label for="name">Name</label>
@@ -66,15 +63,15 @@
 
         <div class="field">
           <label for="message">What are you trying to solve?</label>
-          <textarea id="message" name="message" rows="4" placeholder="Tell us briefly what you need..."></textarea>
+          <textarea id="message" name="message" rows="4" placeholder="Give us the short version..."></textarea>
           <p class="field__error" data-for="message"></p>
         </div>
 
-        <button type="submit" class="ticket__submit">
-          <span>File this ticket</span>
+        <button type="submit" class="submit-btn">
+          <span>Send it over</span>
         </button>
 
-        <p class="ticket__note" id="formNote"></p>
+        <p class="form-note" id="formNote"></p>
       </form>
     </section>
   </main>

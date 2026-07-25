@@ -1,18 +1,14 @@
 // app.js — landing page form logic
 const form = document.getElementById('leadForm');
 const note = document.getElementById('formNote');
-const ticketNumber = document.getElementById('ticketNumber');
-const submitBtn = form.querySelector('.ticket__submit');
-
-// A little theatre: shows a provisional ticket number before the real one comes back from the server.
-ticketNumber.textContent = '#' + Math.floor(1000 + Math.random() * 8999);
+const submitBtn = form.querySelector('.submit-btn');
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function clearErrors() {
   form.querySelectorAll('.field__error').forEach(el => el.textContent = '');
   note.textContent = '';
-  note.className = 'ticket__note';
+  note.className = 'form-note';
 }
 
 function validateClientSide(data) {
@@ -44,7 +40,7 @@ form.addEventListener('submit', async (e) => {
   }
 
   submitBtn.disabled = true;
-  submitBtn.querySelector('span').textContent = 'Filing...';
+  submitBtn.querySelector('span').textContent = 'Sending...';
 
   try {
     const res = await fetch('/api/leads', {
@@ -62,8 +58,7 @@ form.addEventListener('submit', async (e) => {
       return;
     }
 
-    ticketNumber.textContent = '#' + String(result.id).padStart(4, '0');
-    note.textContent = 'Ticket filed. We\u2019ll be in touch shortly.';
+    note.textContent = "Got it — someone will reach out soon.";
     note.classList.add('success');
     form.reset();
   } catch (err) {
@@ -71,6 +66,6 @@ form.addEventListener('submit', async (e) => {
     note.classList.add('error');
   } finally {
     submitBtn.disabled = false;
-    submitBtn.querySelector('span').textContent = 'File this ticket';
+    submitBtn.querySelector('span').textContent = 'Send it over';
   }
 });

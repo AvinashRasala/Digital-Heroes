@@ -1,25 +1,25 @@
 :root {
-  --ink: #12141c;
-  --ink-soft: #1b1f2b;
-  --paper: #edeae2;
-  --paper-dim: #d9d5c9;
-  --teal: #4c9a8e;
-  --alert: #d8503a;
-  --text-on-ink: #edeae2;
-  --text-muted: #8b93a7;
-  --text-on-paper: #1b1f2b;
+  --plum: #241726;
+  --plum-soft: #331f36;
+  --paper: #FBF9F4;
+  --paper-dim: #E7E2D6;
+  --amber: #F2A93B;
+  --sage: #3E8E7E;
+  --text-on-plum: #FBF9F4;
+  --text-muted: #A99DAB;
+  --text-on-paper: #241726;
 
-  --font-display: 'Space Grotesk', sans-serif;
+  --font-display: 'Sora', sans-serif;
   --font-body: 'Inter', sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  background: var(--ink);
-  color: var(--text-on-ink);
+  background: var(--plum);
+  color: var(--text-on-plum);
   font-family: var(--font-body);
   min-height: 100vh;
 }
@@ -29,15 +29,15 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 20px 32px;
-  border-bottom: 1px solid rgba(237,234,226,0.12);
+  border-bottom: 1px solid rgba(251,249,244,0.1);
 }
 .topbar__mark {
   font-family: var(--font-display);
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   font-size: 15px;
 }
-.topbar__mark span { color: var(--teal); }
+.topbar__mark span { color: var(--amber); }
 .topbar__meta {
   font-family: var(--font-mono);
   font-size: 12px;
@@ -49,9 +49,9 @@ body {
 .dot {
   width: 7px; height: 7px;
   border-radius: 50%;
-  background: var(--teal);
+  background: var(--amber);
   display: inline-block;
-  box-shadow: 0 0 8px var(--teal);
+  box-shadow: 0 0 8px var(--amber);
 }
 
 .layout {
@@ -72,21 +72,22 @@ body {
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 13px;
-  color: var(--teal);
+  color: var(--amber);
   letter-spacing: 0.04em;
   margin: 0 0 16px;
 }
 .pitch h1 {
   font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 46px);
-  line-height: 1.12;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.1;
   margin: 0 0 20px;
-  font-weight: 600;
+  font-weight: 700;
 }
+.pitch h1 .highlight { color: var(--amber); }
 .pitch__body {
   color: var(--text-muted);
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.65;
   max-width: 46ch;
   margin: 0 0 32px;
 }
@@ -100,64 +101,42 @@ body {
 }
 .pitch__facts li {
   font-size: 14px;
-  color: var(--text-on-ink);
+  color: var(--text-on-plum);
   display: flex;
   gap: 14px;
   align-items: baseline;
 }
 .pitch__facts span {
   font-family: var(--font-mono);
-  color: var(--teal);
+  color: var(--sage);
   font-size: 12px;
   min-width: 20px;
 }
 
-.ticket-wrap { position: relative; }
+.card-wrap { position: relative; }
 
-.ticket {
+.intake-card {
   background: var(--paper);
   color: var(--text-on-paper);
-  border-radius: 4px;
-  padding: 28px 28px 24px;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  border-radius: 14px;
+  padding: 30px 28px 26px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4);
   position: relative;
+  border-top: 5px solid var(--amber);
 }
 
-.ticket__stub {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
+.intake-card__title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 4px;
 }
-.ticket__label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-}
-.ticket__number {
-  font-family: var(--font-mono);
+.intake-card__subtitle {
+  font-family: var(--font-body);
   font-size: 13px;
-  font-weight: 500;
-  color: var(--alert);
+  color: #6b6070;
+  margin: 0 0 22px;
 }
-
-.ticket__perf {
-  height: 0;
-  border-top: 1px dashed var(--paper-dim);
-  margin-bottom: 20px;
-  position: relative;
-}
-.ticket__perf::before, .ticket__perf::after {
-  content: '';
-  position: absolute;
-  top: -6px;
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: var(--ink);
-}
-.ticket__perf::before { left: -34px; }
-.ticket__perf::after { right: -34px; }
 
 .field { margin-bottom: 16px; }
 .field label {
@@ -166,59 +145,60 @@ body {
   font-size: 11px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: #6b6070;
   margin-bottom: 6px;
 }
 .field input, .field select, .field textarea {
   width: 100%;
   border: 1px solid var(--paper-dim);
   background: #fff;
-  border-radius: 3px;
+  border-radius: 8px;
   padding: 10px 12px;
   font-family: var(--font-body);
   font-size: 14px;
   color: var(--text-on-paper);
 }
 .field input:focus, .field select:focus, .field textarea:focus {
-  outline: 2px solid var(--teal);
+  outline: 2px solid var(--amber);
   outline-offset: 1px;
 }
 .field textarea { resize: vertical; min-height: 70px; }
 
 .field__error {
-  color: var(--alert);
+  color: var(--sage);
   font-size: 12px;
   margin: 6px 0 0;
   min-height: 14px;
   font-family: var(--font-mono);
 }
 
-.ticket__submit {
+.submit-btn {
   width: 100%;
-  background: var(--ink);
+  background: var(--plum);
   color: var(--paper);
   border: none;
-  border-radius: 3px;
+  border-radius: 8px;
   padding: 13px;
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 15px;
   cursor: pointer;
   margin-top: 6px;
-  transition: background 0.15s ease;
+  transition: background 0.15s ease, transform 0.1s ease;
 }
-.ticket__submit:hover { background: var(--teal); }
-.ticket__submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.submit-btn:hover { background: var(--sage); }
+.submit-btn:active { transform: scale(0.99); }
+.submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-.ticket__note {
+.form-note {
   text-align: center;
   font-family: var(--font-mono);
   font-size: 12px;
   margin: 12px 0 0;
   min-height: 14px;
 }
-.ticket__note.success { color: #2f7a5a; }
-.ticket__note.error { color: var(--alert); }
+.form-note.success { color: #2f7a3f; }
+.form-note.error { color: var(--sage); }
 
 .site-footer {
   text-align: center;
@@ -227,4 +207,4 @@ body {
   font-size: 12px;
   color: var(--text-muted);
 }
-.site-footer a { color: var(--teal); }
+.site-footer a { color: var(--amber); }
