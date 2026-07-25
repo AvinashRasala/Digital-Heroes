@@ -20,7 +20,10 @@
       </div>
       <div class="field">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" autocomplete="current-password" required>
+        <div class="password-wrap">
+          <input type="password" id="password" name="password" autocomplete="current-password" required>
+          <button type="button" id="togglePassword" class="password-toggle" aria-label="Show password">Show</button>
+        </div>
       </div>
       <p class="field__error" id="loginError"></p>
       <button type="submit" class="submit-btn"><span>Sign in</span></button>

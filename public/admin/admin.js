@@ -3,6 +3,16 @@
 const loginForm = document.getElementById('loginForm');
 if (loginForm) {
   const errEl = document.getElementById('loginError');
+  const passwordInput = document.getElementById('password');
+  const toggleBtn = document.getElementById('togglePassword');
+
+  toggleBtn.addEventListener('click', () => {
+    const isHidden = passwordInput.type === 'password';
+    passwordInput.type = isHidden ? 'text' : 'password';
+    toggleBtn.textContent = isHidden ? 'Hide' : 'Show';
+    toggleBtn.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+  });
+
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     errEl.textContent = '';
@@ -99,11 +109,19 @@ if (statsBar) {
     const next = NEXT_STATUS[lead.status];
     const prev = PREV_STATUS[lead.status];
 
+    const sameEmailCount = currentLeads.filter(l => l.email.toLowerCase() === lead.email.toLowerCase()).length;
+    const isRepeat = sameEmailCount > 1;
+
+    const ageMs = Date.now() - new Date(lead.created_at + 'Z').getTime();
+    const isFresh = ageMs < 60 * 60 * 1000; // under 1 hour old
+
     return `
       <div class="lead-card" data-id="${lead.id}">
         <div class="lead-card__top">
           <span class="lead-card__name">${escapeHtml(lead.name)}</span>
           ${isPriority ? '<span class="priority-badge">HIGH PRIORITY</span>' : ''}
+          ${isFresh ? '<span class="fresh-badge">NEW · under 1h</span>' : ''}
+          ${isRepeat ? `<span class="repeat-badge">Repeat contact (${sameEmailCount}×)</span>` : ''}
         </div>
         <div class="lead-card__email">${escapeHtml(lead.email)}</div>
         <div class="lead-card__msg" title="${escapeHtml(lead.message || '')}">${escapeHtml(lead.message || 'No message provided.')}</div>
@@ -121,18 +139,38 @@ if (statsBar) {
   }
 
   async function updateStatus(id, status) {
-    await fetch(`/api/admin/leads/${id}/status`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status })
-    });
-    loadLeads(searchInput.value.trim());
+    try {
+      const res = await fetch(`/api/admin/leads/${id}/status`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status })
+      });
+      if (!res.ok) {
+        alert('Could not update status — please try again.');
+        return;
+      }
+      loadLeads(searchInput.value.trim());
+    } catch (err) {
+      alert('Network error — could not reach the server. Please try again.');
+    }
   }
 
   async function deleteLead(id) {
     if (!confirm('Delete this lead? This cannot be undone.')) return;
-    await fetch(`/api/admin/leads/${id}`, { method: 'DELETE' });
-    loadLeads(searchInput.value.trim());
+    try {
+      const res = await fetch(`/api/admin/leads/${id}`, { method: 'DELETE' });
+      if (!res.ok) {
+        if (res.status === 401) {
+          window.location.href = '/admin/login.html';
+          return;
+        }
+        alert('Could not delete this lead — please try again.');
+        return;
+      }
+      loadLeads(searchInput.value.trim());
+    } catch (err) {
+      alert('Network error — could not reach the server. Please try again.');
+    }
   }
 
   function escapeHtml(str) {

@@ -196,3 +196,46 @@
   cursor: pointer;
 }
 .delete-btn:hover { border-color: var(--sage); color: var(--sage); }
+
+.password-wrap {
+  position: relative;
+  display: flex;
+}
+.password-wrap input {
+  flex: 1;
+  padding-right: 56px;
+}
+.password-toggle {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--sage);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+.password-toggle:hover { text-decoration: underline; }
+
+.repeat-badge {
+  background: var(--paper-dim);
+  color: #6b6070;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+}
+
+.fresh-badge {
+  background: var(--sage);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+}
