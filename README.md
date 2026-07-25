@@ -125,3 +125,20 @@ and what you changed. e.g.: "I used Claude to scaffold the Express routes and
 the initial CSS, then changed the ticket-number UX to show a provisional
 number before the real one comes back, rewrote the empty-state copy, and cut
 an animation that felt gimmicky."]
+
+# LeadDesk Mini
+
+## Features
+
+- Lead submission
+- Admin dashboard
+- Search leads
+- Update lead status
+- Delete leads
+- Export CSV
+
+## AI Usage
+
+I used AI as a development assistant throughout this project to better understand the existing codebase, debug backend API issues, and explain implementation details. AI helped identify a missing DELETE API endpoint, explain Express.js routing, and suggest improvements to the application's structure.
+
+I personally reviewed all suggested code, integrated the required changes, tested the application locally and after deployment, and customized the project by updating the interface and functionality. AI accelerated the development process, while I remained responsible for implementing, verifying, and submitting the final solution.
