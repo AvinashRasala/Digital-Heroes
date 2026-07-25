@@ -60,6 +60,32 @@ app.post('/api/leads', (req, res) => {
   res.status(201).json({ id: Number(info.lastInsertRowid) });
 });
 
+// ---------- One-time admin setup (no shell access needed on free hosting tiers) ----------
+// Protected by SETUP_SECRET, a separate env var from the admin password itself.
+// Safe to leave in: it refuses to run if an admin already exists, and does nothing
+// without the correct secret.
+app.post('/api/setup-admin', (req, res) => {
+  const { secret } = req.body || {};
+  if (!process.env.SETUP_SECRET || secret !== process.env.SETUP_SECRET) {
+    return res.status(403).json({ error: 'Forbidden.' });
+  }
+
+  const username = process.env.ADMIN_USERNAME;
+  const password = process.env.ADMIN_PASSWORD;
+  if (!username || !password) {
+    return res.status(400).json({ error: 'ADMIN_USERNAME / ADMIN_PASSWORD not set in environment.' });
+  }
+
+  const existing = db.prepare('SELECT id FROM admins WHERE username = ?').get(username);
+  if (existing) {
+    return res.json({ ok: true, message: `Admin "${username}" already exists — nothing to do.` });
+  }
+
+  const hash = bcrypt.hashSync(password, 10);
+  db.prepare('INSERT INTO admins (username, password_hash) VALUES (?, ?)').run(username, hash);
+  res.json({ ok: true, message: `Admin "${username}" created.` });
+});
+
 // ---------- Auth API ----------
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body || {};
